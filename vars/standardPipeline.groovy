@@ -16,6 +16,9 @@ def call(body){
         checkout scm
       }
       stage('Build'){
+        def shell(command) {
+            return bat(returnStdout: true, script: "sh -x -c \"${command}\"").trim()
+        }
         sh "echo 'building ${config.projectName} ...'"
       }
       stage('Tests'){
