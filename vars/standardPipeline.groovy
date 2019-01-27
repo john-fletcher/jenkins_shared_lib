@@ -16,24 +16,21 @@ def call(body){
         checkout scm
       }
       stage('Build'){
-        def shell(command) {
-            return bat(returnStdout: true, script: "sh -x -c \"${command}\"").trim()
-        }
-        sh "echo 'building ${config.projectName} ...'"
+         bat "echo 'building ${config.projectName} ...'"
       }
       stage('Tests'){
         parall 'static': {
-          sh "echo 'shell scripts to run static tests ...'"
+          bat "echo 'shell scripts to run static tests ...'"
         },
         'unit': {
-          sh "echo 'shell scripts to run unit tests ...'"
+          bat "echo 'shell scripts to run unit tests ...'"
         },
         'integration': {
-          sh "echo 'shell scripts to run integration tests ...'"
+          bat "echo 'shell scripts to run integration tests ...'"
         }
       }
       stage('Deploy'){
-        sh "echo 'deploying to server ${config.serverDomain}...'"
+        bat "echo 'deploying to server ${config.serverDomain}...'"
       }
     } catch(err){
       currentBuild.result = 'FAILED'
