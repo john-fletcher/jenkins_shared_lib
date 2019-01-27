@@ -19,7 +19,7 @@ def call(body){
          bat "echo 'building ${config.projectName} ...'"
       }
       stage('Tests'){
-        parall 'static': {
+        parallel 'static': {
           bat "echo 'shell scripts to run static tests ...'"
         },
         'unit': {
